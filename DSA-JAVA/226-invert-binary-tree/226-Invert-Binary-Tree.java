@@ -15,18 +15,15 @@
  */
 class Solution {
     public TreeNode invertTree(TreeNode root) {
-        if(root==null)return null;
-        Deque<TreeNode> q=new LinkedList<>();
-        q.add(root);
-        while(!q.isEmpty()){
-                TreeNode c=q.poll();
-                TreeNode t=c.left;
-                c.left=c.right;
-                c.right=t;
-                if(c.left!=null)q.add(c.left);
-                if(c.right!=null)q.add(c.right);
-            }
-        
-        return root;
+        return dfs(root);
+    }
+    public TreeNode dfs(TreeNode root1){
+        if(root1==null)return null;
+        TreeNode t=root1.left;
+        root1.left=root1.right;
+        root1.right=t;
+        dfs(root1.left);
+        dfs(root1.right);
+        return root1;
     }
 }
